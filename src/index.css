@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+body{
+  background-color: #0D1117;
+}
+
 /* Header Stylling */
 .Header {
   position: fixed;
@@ -28,6 +32,7 @@
     height: 100px;
     top: 16%;
     left: 10%;
+    cursor: pointer;
 }
 
 .search-bar {
@@ -45,13 +50,17 @@ input {
     background: transparent;
     border: 0;
     width: 100%;
-    padding-top: 2px;
+    padding-top: 5px;
     padding-left: 30px;
     outline: none;
     font-size: 20px;
     color: #fff;
     font-family: 'Times New Roman', Times, serif;
 }
+
+/* input ::placeholder{
+  color: #ccc;
+} */
 
 .buttons {
     position: absolute;
@@ -158,16 +167,10 @@ li:hover {
   padding-top: 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 40px;
 }
 
-/* .FreeCard,
-.PaidCard{
-  height: 250px;
-  width: 355px;
-} */
-
-.Card{
+.Card {
   height: 250px;
   width: 360px;
 }
@@ -177,28 +180,19 @@ li:hover {
   border-radius: 8px;
   overflow: hidden;
   width: 100%;
-  height: 70%;
+  height: 180px;
+}
+
+.cardInfo {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 30%;
 }
 
 .videoImage {
   object-fit: cover;
   overflow: hidden;
-  width: 100%;
-  height: 100%;
-  /* filter: saturate(75%) brightness(75%);  */
-}
-
-.videoTitle {
-  position: absolute;
-  width: 100%;
-  top: 50%; 
-  transform: translateY(-50%);
-  text-align: center; 
-  font-size: 30px;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 500;
-  color: white;
-  word-spacing: 1px;
 }
 
 .icons{
@@ -261,25 +255,21 @@ li:hover {
   margin-left: 1.5px;
 }
 
-.cardInfo{
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 30%;
-}
+
 
 .cardLogo{
   position: absolute;
   top: 20%;
-  width: 20%;
+  width: auto;
   left: 0%;
+  /* border: 1px solid #ccc; */
 }
 
-.logo img{
+.cardLogo img{
   object-fit: cover;
   overflow: hidden;
-  height: 40px;
-  width: 40px;
+  height: 45px;
+  width: 45px;
   border-radius: 50%;
   border: 1px solid #ccc;
 }
@@ -293,10 +283,13 @@ li:hover {
 }
 
 .cardTitle span{
+  position: absolute;
   font-size: 20px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
   color: white;
+  text-align: left !important;
+  left: 0 !important;
 }
 
 .freeOrpaid {
@@ -306,6 +299,7 @@ li:hover {
   border: 1px solid #ccc;
   background-color: #cccccc88;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .freeOrpaid span {
@@ -426,6 +420,7 @@ iframe{
   display: flex;
   align-items: center;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .nextCardLike span{
@@ -447,6 +442,7 @@ iframe{
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .nextCardShare span{
@@ -467,6 +463,7 @@ iframe{
   margin-top: 3.5px;
   margin-left: 10px;
   background-color: #cccccc88;
+  cursor: pointer;
 }
 
 .nextCardDownload span{
@@ -612,6 +609,235 @@ iframe{
 
 
 
+/* likeList start */
+.likeListOverlay {
+  position: fixed;
+  top: 0;
+  left: 61.5%;
+  transform: translateX(-50%); 
+  z-index: 1000; 
+}
+
+.likeList {
+  background-color: #0D1117;
+  height: 580px;
+  width: 450px;
+  border : 2px solid white;
+  border-radius: 30px;
+  margin-top: 25px;
+}
+
+.likevideos{
+  display: flex;
+  flex-direction: row; 
+  width : 95%;
+  height : 100px;
+  /* border: 1px solid white; */
+  margin: 20px 0 0 10px;
+}
+
+.likevideosImage {
+  height: 100%;
+  width: 42%;
+  /* border: 1px solid white; */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.likevideosImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 8px;
+}
+
+
+.likevideosinfo{  
+  height: 100%;
+  width: 58%;
+  /* border: 1px solid white; */
+  margin-left: 10px;
+  position: relative;
+}
+
+.likevideosTitle{
+  height: 60%;
+  /* border: 1px solid white; */
+  width: 100%;
+}
+
+.likevideosTitle span{
+  position: absolute;
+  color: white;
+  font-size: 18px;
+  left: 0 !important;
+  text-align: left !important;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.Divide{
+  display: flex;
+}
+
+.likevideosViews{
+  width: 70%;
+  height: 30%;
+  /* border: 1px solid white; */
+  margin-top: 10px;
+}
+
+.likevideosViews span{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.deleteButton{
+  height: 40px;
+  width: 40px;
+  border: 1px solid #ccc;
+  background-color: #cccccc88;
+  border-radius: 50%;
+  margin-left: 25px;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  cursor: pointer;
+}
+
+.deleteButton span{
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif; 
+}
+
+/* like end */
+
+
+
+
+
+
+/* UserProfile start */
+.UserProfileOverlay {
+  position: fixed;
+  top: 0;
+  left: 75.5%;
+  transform: translateX(-50%); 
+  z-index: 1000; 
+}
+
+.UserProfile {
+  background-color: #0D1117;
+  height: 370px;
+  width: 290px;
+  border : 2px solid white;
+  border-radius: 30px;
+  margin-top: 25px;
+}
+
+.UPList{
+  margin: 15px 0 0 10px;
+  height: auto;
+  width: auto;
+  /* border : 1px solid white; */
+}
+
+.UserData {
+  display: flex;
+  align-items: center;
+}
+
+.PP {
+  border: 1px solid white;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  overflow: hidden;
+}
+
+.PP img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.UandE {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.UandE span {
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 17.5px;
+  border: none;
+  background: transparent;
+  padding: 1px;
+}
+
+.Download,
+.History,
+.Appearance,
+.LogOut {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 95%;
+  height: 10%; 
+  margin-top: 20px;
+}
+
+.DI,
+.HI,
+.AI,
+.LI {
+  margin-left: 5px;
+  padding: 10px;
+  background: transparent;
+  font-size: 22px;
+  color: white;
+}
+
+.DW,
+.HW,
+.AW,
+.LW {
+  color: white;
+  margin-left: 30px;
+  padding: 10px;
+  background: transparent;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 17.5px;
+  letter-spacing: 1.5px;
+}
+
+.Download:hover,
+.History:hover,
+.Appearance select:hover,
+.LogOut:hover {
+  background-color: #cccccc88;
+}
+
+.Appearance select {
+  padding: 4px;
+  font-size: 16px;
+  border: 1.5px solid white;
+  border-radius: 5px;
+  color: white;
+  background-color: transparent;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+}
+/* UserProfile end */
 
 
 
@@ -626,6 +852,129 @@ iframe{
 
 
 
+/* History start */
+.UserHistory {
+  background-color: #0D1117;
+  height: auto;
+  width: 70%;
+  /* border : 2px solid white; */
+  margin-top: 170px;
+  margin-left: 195px;
+}
+
+.Hspan1{
+  color: white;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 1px;
+}
+
+.Hspan2{
+  color: white;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 1px;
+}
+
+.historyVideos{
+  display: flex;
+  flex-direction: row; 
+  width : 97%;
+  height : 180px;
+  /* border: 1px solid white; */
+  margin-top: 30px;
+}
+
+.historyVideosImage {
+  height: 100%;
+  width: 35%;
+  /* border: 1px solid white; */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.historyVideosImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 8px;
+}
+
+.historyVideosinfo{  
+  height: 100%;
+  width: 65%;
+  /* border: 1px solid white; */
+  margin-left: 20px;
+  position: relative;
+}
+
+.historyVideosTitle{
+  height: 40%;
+  /* border: 1px solid white; */
+  width: 100%;
+}
+
+.historyVideosTitle span{
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  left: 0 !important;
+  text-align: left !important;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.historyDivide {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid white; */
+  width: 100%;
+  height: 20%;
+}
+
+.historyVideosViews {
+  margin-top: 10px;
+}
+
+.historyVideosViews span {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.deleteButton {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #ccc;
+  background-color: #cccccc88;
+  border-radius: 50%;
+  margin-left: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.deleteButton span {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.historyVideosDesc span{
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  left: 0 !important;
+  text-align: left !important;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* History end */
 
 
 
@@ -639,8 +988,290 @@ iframe{
 
 
 
+/* Download start */
+.UserDownloads {
+  background-color: #0D1117;
+  height: auto;
+  width: 70%;
+  /* border : 2px solid white; */
+  margin-top: 170px;
+  margin-left: 195px;
+}
+
+.Dspan1{
+  color: white;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 1px;
+}
+
+.Dspan2{
+  color: white;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 1px;
+}
+
+.downloadVideos{
+  display: flex;
+  flex-direction: row; 
+  width : 97%;
+  height : 180px;
+  /* border: 1px solid white; */
+  margin-top: 30px;
+}
+
+.downloadVideosImage {
+  height: 100%;
+  width: 35%;
+  /* border: 1px solid white; */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.downloadVideosImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 8px;
+}
+
+.downloadVideosinfo{  
+  height: 100%;
+  width: 65%;
+  /* border: 1px solid white; */
+  margin-left: 20px;
+  position: relative;
+}
+
+.downloadVideosTitle{
+  height: 40%;
+  /* border: 1px solid white; */
+  width: 100%;
+}
+
+.downloadVideosTitle span{
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  left: 0 !important;
+  text-align: left !important;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.downloadDivide {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid white; */
+  width: 100%;
+  height: 20%;
+}
+
+.downloadVideosViews {
+  margin-top: 10px;
+}
+
+.downloadVideosViews span {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.deleteButton {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #ccc;
+  background-color: #cccccc88;
+  border-radius: 50%;
+  margin-left: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.deleteButton span {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.downloadVideosDesc span{
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  left: 0 !important;
+  text-align: left !important;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Download end */
 
 
+
+
+
+
+
+
+
+
+
+
+
+/* Share start */
+.ShareBoxOverlay {
+  position: fixed;
+  top: 30%;
+  left: 52%;
+  transform: translateX(-50%); 
+  z-index: 1000; 
+}
+
+.ShareBox {
+  background-color: #0D1117;
+  height: 300px;
+  width: 530px;
+  border : 2px solid white;
+  border-radius: 20px;
+}
+
+.ShareDiv{
+  height: 90%;
+  width: 93%;
+  margin-top: 15px;
+  margin-left: 18px;
+  /* border : 2px solid white; */
+}
+
+.ShareTop{
+  height: 15%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* border : 2px solid white; */
+}
+
+.ShareTop span{
+  font-size: 25px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+  letter-spacing: 1.5px;
+}
+
+.CloseButton {
+  font-size: 30px;
+  font-weight: 500;
+  color: white;
+  margin-left: auto;
+  cursor: pointer;
+  margin-top: 3px;
+}
+
+
+.ShareMid{
+  height: 40%;
+  width: 100%;
+  /* border : 2px solid white; */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.EmbedShare,
+.WhatsappShare,
+.FacebookShare,
+.XShare,
+.EmailShare,
+.LinkedinShare{
+  margin-top: 10px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  border : 1px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+
+.EmbedImage img,
+.WhatsappImage img,
+.FacebookImage img,
+.XImage img,
+.EmailImage img,
+.LinkedinImage img {
+  height: 100%; /* Make sure the image takes up the full height of its container */
+  width: 100%; /* Make sure the image takes up the full width of its container */
+  border-radius: 50%; /* Maintain border-radius for circular images */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.ShareMid span{
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 75px;
+}
+
+.ShareBottom {
+  margin-top: 30px;
+  height: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center; 
+}
+
+.ShareLinkBox {
+  margin: 10px;
+  height: 85%;
+  width: 100%;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
+}
+
+.ShareLinkBox span {
+  color: white;
+  font-size: 15px;
+  margin: 17px 0 0 10px;
+  /* word-wrap: break-word;  */
+}
+
+.ShareBottom button {
+  background-color: #4CAF50; 
+  color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 17.5px;
+  font-weight: 500;
+  width: 70px;
+  height: 40px;
+  margin: 10px 5px 0 0;
+  font-family: 'Times New Roman', Times, serif;
+  /* align-self: flex-end;  */
+}
+
+.ShareBottom button:hover{
+  color: #ccc;
+  background-color: #4caf4fb2;
+}
+
+/* Share end */
 
 
 

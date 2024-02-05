@@ -112,8 +112,8 @@ const videosArray = videoItems.map((item) => ({
 <div className="Home">
 
       <div className="Cards">
-        {videos.map((video) => (
-          <div className="Card">
+        {videos.map((video, index) => (
+          <div className="Card" key={index}>
             <div className="video">
               <img className="image" src={video.thumbnail} alt="Video Thumbnail" />
               <span className="videoTitle">{video.title}</span> 

@@ -1,203 +1,81 @@
-// import React, { useState, useEffect, useCallback } from 'react';
-// import axios from 'axios';
-// import { FaEye, FaClock, FaHeart, FaDollarSign } from 'react-icons/fa';
-// import { Link, useNavigate } from 'react-router-dom';
-// import logo from "../images/raj-removebg-preview.png";
-// import "../index.css";
-
-// const formatViews = (views) => {
-//   if (views >= 1000000) {
-//     return (views / 1000000).toFixed(1) + 'M';
-//   } else if (views >= 1000) {
-//     return (views / 1000).toFixed(1) + 'k';
-//   } else {
-//     return views.toString();
-//   }
-// };
-
-// const RecipeCard = () => {
-//   const [freeVideos, setFreeVideos] = useState([]);
-//   const [paidVideos, setPaidVideos] = useState([]);
-//   const [loadingFreeVideos, setLoadingFreeVideos] = useState(false);
-//   const [loadingPaidVideos, setLoadingPaidVideos] = useState(false);
-//   const navigate = useNavigate();
-
-//   const fetchFreeVideos = useCallback(async () => {
-//     try {
-//       setLoadingFreeVideos(true);
-//       const response = await axios.get('http://localhost:8000/api/v2/videos/free');
-//       setFreeVideos(prevFreeVideos => [...prevFreeVideos, ...response.data]);
-//     } catch (error) {
-//       console.error('Error fetching free videos:', error.message);
-//     } finally {
-//       setLoadingFreeVideos(false);
-//     }
-//   }, []);
-
-//   const fetchPaidVideos = useCallback(async () => {
-//     try {
-//       setLoadingPaidVideos(true);
-//       const response = await axios.get('http://localhost:8000/api/v2/videos/paid');
-//       setPaidVideos(prevPaidVideos => [...prevPaidVideos, ...response.data]);
-//     } catch (error) {
-//       console.error('Error fetching paid videos:', error.message);
-//     } finally {
-//       setLoadingPaidVideos(false);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       await fetchFreeVideos();
-//       await fetchPaidVideos();
-//     };
-//     fetchData();
-//   }, [fetchFreeVideos, fetchPaidVideos]);
-
-//   const shuffleArray = (array) => {
-//     for (let i = array.length - 1; i > 0; i--) {
-//       const j = Math.floor(Math.random() * (i + 1));
-//       [array[i], array[j]] = [array[j], array[i]];
-//     }
-//   };
-
-//   // Shuffle the videos when the component mounts
-//   useEffect(() => {
-//     shuffleArray(freeVideos);
-//     shuffleArray(paidVideos);
-//   }, [freeVideos, paidVideos]);
-
-//   return (
-//     <div className='Home'>
-
-//       <div className="Cards">
-//         {/* Free Videos */}
-//         {freeVideos.map((video) => (
-//           <div key={video._id}>
-//             {/* Use a button or any clickable element to handle the click event */}
-//             <button
-//               onClick={() => navigate(`/nextCard`, { state: { videoInfo: video } })}
-//             >
-//               <Link to={{
-//                 pathname: '/nextCard',
-//                 state: { videoInfo: video }
-//               }} key={video._id}>
-//                 <div className="FreeCard" key={video._id}>
-//                   <a href={video.videoURL} target="_blank" rel="noopener noreferrer">
-//                     <div className="video">
-//                       <img className="image" src={video.thumbnailURL} alt="Video Thumbnail" />
-//                       <div className="icons">
-//                         <div className="one">
-//                           <span className="star">
-//                             <FaEye />
-//                           </span>
-//                           <span className="rating">{formatViews(video.views)}</span>
-//                         </div>
-//                         <div className="two">
-//                           <span className="clock">
-//                             <FaClock />
-//                           </span>
-//                           <span className="time">{video.duration}</span>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </a>
-//                   <div className="info">
-//                     <div className="logo">
-//                       <img src={logo} alt="Channel Logo" />
-//                     </div>
-//                     <div className="title">
-//                       <span>{video.title}</span>
-//                     </div>
-//                     <div className="like">
-//                       <span>
-//                         <FaHeart />
-//                       </span>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </Link>
-//             </button>
-//           </div>
-//         ))}
-
-//         {/* Paid Videos */}
-//         {paidVideos.map((video) => (
-//           <div key={video._id}>
-//             {/* Use a button or any clickable element to handle the click event */}
-//             <button
-//               onClick={() => navigate(`/nextCard`, { state: { videoInfo: video } })}
-//             >
-//               <Link to={{
-//                 pathname: '/nextCard',
-//                 state: { videoInfo: video }
-//               }} key={video._id}>
-//                 <div className="PaidCard" key={video._id}>
-//                   <a href={video.videoURL} target="_blank" rel="noopener noreferrer">
-//                     <div className="video">
-//                       <img className="image" src={video.thumbnailURL} alt="Video Thumbnail" />
-//                       <div className="icons">
-//                         <div className="one">
-//                           <span className="star">
-//                             <FaEye />
-//                           </span>
-//                           <span className="rating">{formatViews(video.likes)}</span>
-//                         </div>
-//                         <div className="two">
-//                           <span className="clock">
-//                             <FaClock />
-//                           </span>
-//                           <span className="time">{video.duration}</span>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </a>
-//                   <div className="info">
-//                     <div className="logo">
-//                       <img src={logo} alt="Channel Logo" />
-//                     </div>
-//                     <div className="title">
-//                       <span>{video.title}</span>
-//                     </div>
-//                     <div className="purchase">
-//                       <span>
-//                         <FaDollarSign />
-//                       </span>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </Link>
-//             </button>
-//           </div>
-//         ))}
-//       </div>
-
-//     </div>
-//   );
-// };
-
-// export default RecipeCard;
-
-
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import { FaEye, FaClock, FaHeart, FaDollarSign } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../images/raj-removebg-preview.png";
 import "../index.css";
+import Header from '../Header/Header';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Like from '../Header/Like';
 
 const RecipeCard = () => {
+
+  const notifyFreeVideo = () => {
+    toast.info('Great choice! You successfully like the video.', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+        style: {
+          color: "#ffffff", 
+          borderRadius: "8px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
+          fontSize: "16px",
+          fontWeight: "bold", 
+        },
+      });
+      console.log('Like done.')
+  }
+
+  const notifyPaidVideo = () => {
+    toast.error('Oops! This video is paid. Please add it to your cart to watch.', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+      style: {
+        background: "#ff6f61",
+        color: "#ffffff", 
+        borderRadius: "8px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
+        fontSize: "16px",
+        fontWeight: "bold", 
+      },
+    });
+  };
+  
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const [searchResults, setSearchResults] = useState([])
   const [videos, setVideos] = useState([]);
   const [loadingVideos, setLoadingVideos] = useState(false);
   const [hasShuffled, setHasShuffled] = useState(false);
+  const [likedVideos, setLikedVideos] = useState([]);
 
-  const navigate = useNavigate();
+  const handleVideoClick = (video) => {
+    console.log('Video clicked:', video);
+    setLikedVideos((prevLikedVideos) => [...prevLikedVideos, 
+      { _id: video._id, title: video.title, image: video.thumbnailURL, views: video.views }]);
+  };
 
-  const fetchVideos = useCallback(async () => {
+  const fetchVideos = async () => {
     try {
       setLoadingVideos(true);
       const response = await axios.get('http://localhost:8000/api/v2/videos');
+      // console.log("fetchVideos ....",response)
       setVideos(response.data);
       setHasShuffled(false); 
     } catch (error) {
@@ -205,11 +83,11 @@ const RecipeCard = () => {
     } finally {
       setLoadingVideos(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     fetchVideos();
-  }, [fetchVideos]);
+  }, []);
 
   // Function to shuffle an array using Fisher-Yates algorithm
   const shuffleArray = (array) => {
@@ -239,38 +117,61 @@ const RecipeCard = () => {
     }
   };
 
-  return (
+  const handleSearch = (searchTerm) => {
+    if(searchTerm && videos && videos.length > 0) {
+      const filteredResults = videos.filter((video) => 
+      video.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredResults);
+    }
+  };
+
+  useEffect(() => {
+    if(location && location.state) {
+      let searchTerm= location?.state?.searchTerm
+    handleSearch(searchTerm)
+    }
+  },[location , videos])
+  
+return (
+  <>
+    <Header onSearch={handleSearch} />
+    {/* <Like likedVideos={likedVideos} /> */}
+
     <div className='HomePage'>
       <div className="Cards">
-        {videos.map((video) => (
-          <div key={video._id}>
-            <button
-              onClick={() => navigate(`/nextCard`, { state: { videoInfo: video } })}
-            >
-              <Link to={{
-                pathname: '/nextCard',
-                state: { videoInfo: video }
-              }} key={video._id}>
-                <div className="Card" key={video._id}>
-                  <a href={video.videoURL} target="_blank" rel="noopener noreferrer">
-                    <div className="video">
-                      <img className="videoImage" src={video.thumbnailURL} alt="Video Thumbnail" />
-                      <div className="icons">
-                        <div className="one">
-                          <span className="eye">
-                            <FaEye />
-                          </span>
-                          <span className="views">{formatViews(video.views)}</span>
-                        </div>
-                        <div className="two">
-                          <span className="clock">
-                            <FaClock />
-                          </span>
-                          <span className="duration">{video.duration}</span>
+        {searchResults.length > 0 ? (
+          searchResults.map((video, index) => (
+            <div key={index}>
+              <div className="Card">
+                <button
+                  onClick={() => navigate(`/nextCard`, { state: { videoInfo: video } })}
+                >
+                  <Link to={{
+                    pathname: '/nextCard',
+                    state: { videoInfo: video }
+                  }} key={video._id}>
+                    <a href={video.videoURL} target="_blank" rel="noopener noreferrer">
+                      <div className="video">
+                        <img className="videoImage" src={video.thumbnailURL} alt="Video Thumbnail" />
+                        <div className="icons">
+                          <div className="one">
+                            <span className="eye">
+                              <FaEye />
+                            </span>
+                            <span className="views">{formatViews(video.views)}</span>
+                          </div>
+                          <div className="two">
+                            <span className="clock">
+                              <FaClock />
+                            </span>
+                            <span className="duration">{video.duration}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </a>
+                    </a>
+                  </Link>
+                </button>
                   <div className="cardInfo">
                     <div className="cardLogo">
                       <img src={logo} alt="Channel Logo" />
@@ -280,18 +181,77 @@ const RecipeCard = () => {
                     </div>
                     <div className="freeOrpaid">
                       <span>
-                        {video.isPaid ? <FaDollarSign /> : <FaHeart />}
+                        {video.isPaid ? (
+                          <FaDollarSign onClick={notifyPaidVideo} />
+                        ) : (
+                          <FaHeart onClick={notifyFreeVideo} />
+                        )}
                       </span>
+                    </div>  
+                  </div>   
+              </div>
+            </div>
+          ))
+
+        ) : (
+          videos.map((video) => (
+            <div key={video._id}>
+                  <div className="Card" key={video._id}>
+                    <button
+                      onClick={() => navigate(`/nextCard`, { state: { videoInfo: video } })}
+                    >
+                      <Link to={{
+                        pathname: '/nextCard',
+                        state: { videoInfo: video }
+                      }} key={video._id}>
+                          <a href={video.videoURL} target="_blank" rel="noopener noreferrer">
+                            <div className="video">
+                              <img className="videoImage" src={video.thumbnailURL} alt="Video Thumbnail" />
+                              <div className="icons">
+                                <div className="one">
+                                  <span className="eye">
+                                    <FaEye />
+                                  </span>
+                                  <span className="views">{formatViews(video.views)}</span>
+                                </div>
+                                <div className="two">
+                                  <span className="clock">
+                                    <FaClock />
+                                  </span>
+                                  <span className="duration">{video.duration}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                      </Link>
+                    </button>
+                    <div className="cardInfo">
+                      <div className="cardLogo">
+                        <img src={logo} alt="Channel Logo" />
+                      </div>
+                      <div className="cardTitle">
+                        <span>{video.title}</span>
+                      </div>
+                      <div className="freeOrpaid">
+                        <span>
+                          {video.isPaid ? (
+                            <FaDollarSign onClick={notifyPaidVideo} />
+                          ) : (
+                            <FaHeart onClick={notifyFreeVideo} />
+                          )}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </Link>
-            </button>
-          </div>
-        ))}
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
-  );
+
+    <ToastContainer />
+  </>
+);
 };
 
 export default RecipeCard;

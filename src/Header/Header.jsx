@@ -1,39 +1,69 @@
-import React from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, { useState } from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import logo from "../images/raj-removebg-preview.png"
-import { FaSearch } from 'react-icons/fa'
-import { FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa'
+import { FaSearch, FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa'
+import Like from "./Like"
 import "../index.css"
+import UserProfile from './UserProfile'
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [likeListVisible, setLikeListVisible] = useState(false);
+  const [userProfileVisible, setUserProfileVisible] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = () => {
+    setSearchTerm("");
     navigate('/');
+    handleRefreshClick();
   };
+
+  const handleRefreshClick = () => {
+    window.location.reload();
+    setSearchTerm("");
+  };
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    onSearch(searchTerm);
+  };
+
+  const toggleLikeList = () => {
+    setLikeListVisible(!likeListVisible);
+  };
+
+  const toggleUserProfile = () => {
+    setUserProfileVisible(!userProfileVisible)
+  }
 
   return (
     <>
       <div className='Header'>
 
-        <div className='Headerlogo'>
-          <img src={logo} onClick={handleSubmit} alt="logo" />    
+        <div className='Headerlogo' onClick={() => {  handleSubmit(); }}>
+          <img src={logo} alt="logo" />    
         </div>
 
-        <div className="search-bar">
+        <form onSubmit={handleSearch} className="search-bar">
           <input
             type="text"
             placeholder="Search"
+            value={searchTerm}
+            onChange={handleChange}
           />
           <div className='buttons'>
-            <button>
+            <button type='submit'>
               <FaSearch />
             </button>
           </div>
-        </div>
+        </form>
 
-        <div className="favIcon">
+        <div className="favIcon" onClick={toggleLikeList}>
           <FaHeart className="icon" />
         </div>
 
@@ -41,21 +71,34 @@ const Header = () => {
           <FaShoppingCart className="icon" />
         </div>
 
-        <div className="ProfileIcon">
+        <div className="ProfileIcon" onClick={toggleUserProfile}>
           <FaUser className="icon" />
         </div>
 
         <nav className="navbar">
           <ul>
-            <li onClick={() => navigate('/')}>Home</li>
-            <li onClick={() => navigate('/category')}>Category</li>
-            <li onClick={() => navigate('/free')}>Free</li>
-            <li onClick={() => navigate('/scripts')}>Scripts</li>
-            <li onClick={() => navigate('/reviews')}>Reviews</li>
+            <li><Link onClick={() => { handleRefreshClick(); handleSubmit(); }} to="/">Home</Link></li>
+            <li><Link onClick={handleRefreshClick} to="/category">Category</Link></li>
+            <li><Link onClick={handleRefreshClick} to="/free">Free</Link></li>
+            <li><Link onClick={handleRefreshClick} to="/scripts">Scripts</Link></li>
+            <li><Link onClick={handleRefreshClick} to="/reviews">Reviews</Link></li>
           </ul>
         </nav>
 
       </div>
+
+      {likeListVisible && (
+        <div className="likeListOverlay">
+          <Like />
+        </div>
+      )}
+
+      {userProfileVisible && (
+        <div className="UserProfileOverlay">
+          <UserProfile />
+        </div>
+      )}
+
     </>
   )
 }
