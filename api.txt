@@ -109,48 +109,5 @@ const videosArray = videoItems.map((item) => ({
   duration: item.contentDetails ? item.contentDetails.duration : 'N/A', // Retrieve video duration if available
 }));
 
-<div className="Home">
 
-      <div className="Cards">
-        {videos.map((video, index) => (
-          <div className="Card" key={index}>
-            <div className="video">
-              <img className="image" src={video.thumbnail} alt="Video Thumbnail" />
-              <span className="videoTitle">{video.title}</span> 
-              <div className="icons">
-              
-                <div className="one">
-                  <span className="star">
-                    <FaLike />
-                  </span>
-                  <span className="rating">{video.likeCount}</span>
-                </div>
-
-                <div className="two">
-                  <span className="clock">
-                    <FaClock />
-                  </span>
-                  <span className="time">{video.duration}</span>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="info">
-              <div className="logo">
-                <img src={logo} alt="Channel Logo" />
-              </div>
-              <div className="title">
-                <span>{video.title}</span>
-              </div>
-              <div className="like">
-                <span>
-                  <FaHeart />
-                </span>
-              </div>
-            </div>
-
-          </div>
-        ))}
-      </div>
-    </div>
+     

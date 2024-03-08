@@ -29,6 +29,8 @@ const NextCard = () => {
 
     // Navigate to the next card with the selected video
     navigate(`/nextCard`, { state: { videoInfo: otherVideo } });
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const notifyDownloadVideo = () => {
@@ -102,7 +104,6 @@ const NextCard = () => {
 
   const videoId = extractVideoIdFromUrl(location?.state?.videoInfo?.videoURL);
 
-
   const handleSubmit = (searchTerm) => {
     navigate('/',{state:{searchTerm}})
   }
@@ -159,11 +160,6 @@ const NextCard = () => {
     return <div>{error}</div>;
   }
 
-
-  
-
-  
-
   return (
     <>
     <Header onSearch={handleSubmit} />
@@ -187,21 +183,21 @@ const NextCard = () => {
             <span>{location?.state?.videoInfo?.title}</span>
           </div>
 
-          <div className='nextCardLike' onClick={notifyFreeVideo}>
+          <div className='nextCardLike' title='Like' onClick={notifyFreeVideo}>
             <span>
               <FaHeart />
             </span>
             <span>{formatLikes(location?.state?.videoInfo?.likes)}</span>
           </div>
 
-          <div className='nextCardShare' onClick={toggleShareBox}>
+          <div className='nextCardShare' title='Share' onClick={toggleShareBox}>
             <span>
               <FaShare />
             </span>
             <span>Share</span>
           </div>
 
-          <div className='nextCardDownload' onClick={notifyDownloadVideo}>
+          <div className='nextCardDownload' title='Download' onClick={notifyDownloadVideo}>
             <span>
               <FaDownload />
             </span>

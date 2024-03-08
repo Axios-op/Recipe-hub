@@ -89,43 +89,43 @@ const Share = ({ videoUrl }) => {
             <div className='ShareDiv'>
                 <div className='ShareTop'>
                 <span>Share</span>
-                <div className="CloseButton" onClick={handleClose}>
+                <div className="CloseButton" title='Close' onClick={handleClose}>
                     <FaTimes />
                 </div>
                 </div>
 
                 <div className='ShareMid'>
-                    <div className='EmbedShare' onClick={() => handleShare('embed')}>
+                    <div className='EmbedShare' title='Embed' onClick={() => handleShare('embed')}>
                         <div className='EmbedImage'>
                         {/* <img src={EmbedImage} alt="Embed" /> */}
                         </div>
                         <span>Embed</span>
                     </div>
-                    <div className='WhatsappShare' onClick={() => handleShare('whatsapp')}>
+                    <div className='WhatsappShare' title='Whatsapp' onClick={() => handleShare('whatsapp')}>
                         <div className='WhatsappImage'>
                         {/* <img src={WhatsappImage} alt="WhatsApp" /> */}
                         </div>
-                        <span>Whatsapp</span>
+                        <span>Whatsapp</span> 
                     </div>
-                    <div className='FacebookShare' onClick={() => handleShare('facebook')}>
+                    <div className='FacebookShare' title='Facebook' onClick={() => handleShare('facebook')}>
                         <div className='FacebookImage'>
                         {/* <img src={FacebookImage} alt="Facebook" /> */}
                         </div>
                         <span>Facebook</span>
                     </div>
-                    <div className='XShare' onClick={() => handleShare('x')}>
+                    <div className='XShare' title='X' onClick={() => handleShare('x')}>
                         <div className='XImage'>
                         {/* <img src={XImage} alt="X" /> */}
                         </div>
                         <span>X</span>
                     </div>
-                    <div className='EmailShare' onClick={() => handleShare('email')}>
+                    <div className='EmailShare' title='Email' onClick={() => handleShare('email')}>
                         <div className='EmailImage'>
                         {/* <img src={EmailImage} alt="Email" /> */}
                         </div>
                         <span>Email</span>
                     </div>
-                    <div className='LinkedinShare' onClick={() => handleShare('linkedin')}>
+                    <div className='LinkedinShare' title='Linkedin' onClick={() => handleShare('linkedin')}>
                         <div className='LinkedinImage'>
                         {/* <img src={LinkedinImage} alt="Linkedin" /> */}
                         </div>
@@ -136,8 +136,8 @@ const Share = ({ videoUrl }) => {
                     <div className="ShareBottom">
                     <div className='ShareLinkBox'>
                         <span id="shareLink">{urlText}</span>
-                        <button type='button' onClick={handleCopy}>
-                        Copy
+                        <button type='button' title='Copy' onClick={handleCopy}>
+                            Copy
                         </button>
                     </div>
                 </div>

@@ -35,17 +35,17 @@ const UserProfile = () => {
                     </div>
                 </div>
 
-                <div className='Download' onClick={handleDownloadClick}>
+                <div className='Download' onClick={handleDownloadClick} title='Downloads'>
                     <span className='DI'><FaDownload /></span>
                     <span className='DW'>Downloads</span>
                 </div>
 
-                <div className='History' onClick={handleHistoryClick}>
+                <div className='History' onClick={handleHistoryClick} title='History'>
                     <span className='HI'><FaHistory /></span>
                     <span className='HW'>History</span>
                 </div>
 
-                <div className='Appearance'>
+                <div className='Appearance' title='Appearance'>
                     <span className='AI'><FaMoon /></span>
                     <span className='AW'>Appearance:</span>
                     <select>
@@ -54,7 +54,7 @@ const UserProfile = () => {
                     </select>
                 </div>
 
-                <div className='LogOut' onClick={handleLogOutClick}>
+                <div className='LogOut' onClick={handleLogOutClick} title='Log out'>
                     <span className='LI'><FaSignOutAlt /></span>
                     <span className='LW'>Log out</span>
                 </div>
